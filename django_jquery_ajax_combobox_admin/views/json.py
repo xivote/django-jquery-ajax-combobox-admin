@@ -8,7 +8,14 @@ def json_api(request, id = None):
     from django.contrib import admin
     from django.http import HttpResponse
 
-    import simplejson
+    try:
+        from django.utils import simplejson
+    except ImportError:
+        try:
+            import simplejson
+        except ImportError:
+            import json as simplejson
+
     import operator
 
     user = request.user
