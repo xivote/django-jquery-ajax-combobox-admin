@@ -45,7 +45,7 @@ def json_api(request, id = None):
 
     #Select init_value
     if "pkey_val" in data:
-        obj = objetos.get(**{data["pkey_name"]: data["pkey_val"]})
+        obj = objetos.get(**{str(data["pkey_name"]): data["pkey_val"]})
         if display_field == "unicode":
             str_obj = unicode(obj)
         else:
