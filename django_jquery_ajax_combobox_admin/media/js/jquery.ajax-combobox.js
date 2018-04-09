@@ -628,10 +628,15 @@ $.extend($.ajaxComboBox.prototype, /** @lends external:jQuery.ajaxComboBox.proto
         $(elem.combo_input).attr('name') :
         $(elem.combo_input).attr('id');
       // CakePHP用の対策 例:data[search][user] -> data[search][user_primary_key]
-      if (hidden_name.match(/\]$/)) {
-        hidden_name = hidden_name.replace(/\]?$/, '_primary_key]');
+
+      if (this.option.select_only) {
+          $(elem.combo_input).attr('name', $(elem.combo_input).attr('name') + "-text");
       } else {
-        hidden_name += '_primary_key';
+          if (hidden_name.match(/\]$/)) {
+            hidden_name = hidden_name.replace(/\]?$/, '_primary_key]');
+          } else {
+            hidden_name += '_primary_key';
+          }
       }
       elem.hidden = $('<input type="hidden" />')
         .attr({
